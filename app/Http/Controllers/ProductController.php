@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\AbstractException;
+use App\Http\Requests\BuyRequest;
+use App\Http\Requests\ExtendRentRequest;
+use App\Http\Requests\RentRequest;
 use App\Services\IProductService;
 use App\Services\IUserService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -20,12 +22,11 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param RentRequest $request
      * @return JsonResponse
      */
-    public function rent(Request $request): JsonResponse
+    public function rent(RentRequest $request): JsonResponse
     {
-        // TODO validation
         try {
             $userId = auth('sanctum')->user()->id;
             $user = $this->userService->getUser($userId);
@@ -37,12 +38,11 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param ExtendRentRequest $request
      * @return JsonResponse
      */
-    public function extendRent(Request $request): JsonResponse
+    public function extendRent(ExtendRentRequest $request): JsonResponse
     {
-        // TODO validation
         try { // item id is pivot id
             $userId = auth('sanctum')->user()->id;
             $user = $this->userService->getUser($userId);
@@ -54,10 +54,10 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param BuyRequest $request
      * @return JsonResponse
      */
-    public function buy(Request $request): JsonResponse
+    public function buy(BuyRequest $request): JsonResponse
     {
         try {
             $userId = auth('sanctum')->user()->id;
