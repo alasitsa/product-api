@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Exceptions\AbstractException;
-use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Services\IAuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
