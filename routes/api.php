@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', [\App\Http\Controllers\API\AuthController::class, 'login']);
+Route::post('login', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::get('getAllProducts', [\App\Http\Controllers\ProductController::class, 'getAll']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('logout', [\App\Http\Controllers\API\AuthController::class, 'logout']);
+    Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+    Route::get('getUserProducts', [\App\Http\Controllers\ProductController::class, 'getUserProducts']);
+    Route::post('rent', [\App\Http\Controllers\ProductController::class, 'rent']);
+    Route::post('extendRent', [\App\Http\Controllers\ProductController::class, 'extendRent']);
+    Route::post('buy', [\App\Http\Controllers\ProductController::class, 'buy']);
+    Route::get('getUser', [\App\Http\Controllers\UserController::class, 'getUser']);
+    Route::get('getHistory', [\App\Http\Controllers\HistoryController::class, 'getHistory']);
 });
-
-Route::any('{url}', function () {
-    return response()->json(['message' => 'Unauthorized'])->setStatusCode(401);
-});
-
 

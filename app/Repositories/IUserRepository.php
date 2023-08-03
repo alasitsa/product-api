@@ -17,4 +17,11 @@ interface IUserRepository
      * @return User|null
      */
     public function getUserByEmail(string $email): User|null;
+
+    /**
+     * @param int $userId
+     * @param array $params
+     * @return void
+     */
+    public function updateUser(int $userId, array $params): void;
 }

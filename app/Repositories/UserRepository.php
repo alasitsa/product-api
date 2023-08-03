@@ -24,4 +24,18 @@ class UserRepository implements IUserRepository
     {
         return User::where('email', '=', $email)->first();
     }
+
+    /**
+     * @param int $userId
+     * @param array $params
+     * @return void
+     */
+    public function updateUser(int $userId, array $params): void
+    {
+        $user = $this->getUser($userId);
+        foreach ($params as $field => $value) {
+            $user[$field] = $value;
+        }
+        $user->save();
+    }
 }
