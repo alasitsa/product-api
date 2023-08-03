@@ -23,5 +23,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('extendRent', [\App\Http\Controllers\ProductController::class, 'extendRent']);
     Route::post('buy', [\App\Http\Controllers\ProductController::class, 'buy']);
     Route::get('getUser', [\App\Http\Controllers\UserController::class, 'getUser']);
+    Route::get('getHistory', [\App\Http\Controllers\HistoryController::class, 'getHistory']);
 });
 

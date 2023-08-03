@@ -74,7 +74,12 @@ class ProductController extends Controller
      */
     public function getAll(): JsonResponse
     {
-        return response()->json($this->productService->getAll());
+        try {
+            return response()->json($this->productService->getAll());
+        } catch (AbstractException $exception) {
+            return response()->json(['message' => $exception->getStatusMessage()])->setStatusCode($exception->getStatusCode());
+        }
+
     }
 
     /**
@@ -82,7 +87,11 @@ class ProductController extends Controller
      */
     public function getUserProducts(): JsonResponse
     {
-        $userId = auth('sanctum')->user()->id;
-        return response()->json($this->productService->getUserProducts($userId));
+        try {
+            $userId = auth('sanctum')->user()->id;
+            return response()->json($this->productService->getUserProducts($userId));
+        } catch (AbstractException $exception) {
+            return response()->json(['message' => $exception->getStatusMessage()])->setStatusCode($exception->getStatusCode());
+        }
     }
 }

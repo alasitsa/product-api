@@ -96,10 +96,15 @@ class ProductService implements IProductService
 
     /**
      * @return Collection
+     * @throws ProductNotFoundException
      */
     public function getAll(): Collection
     {
-        return $this->productRepository->getAll();
+        $products = $this->productRepository->getAll();
+        if (!$products->isEmpty()) {
+            return $products;
+        }
+        throw new ProductNotFoundException();
     }
 
     /**
@@ -119,10 +124,15 @@ class ProductService implements IProductService
     /**
      * @param int $userId
      * @return Collection
+     * @throws ProductNotFoundException
      */
     public function getUserProducts(int $userId): Collection
     {
-        return $this->productRepository->getUserItems($userId);
+        $products = $this->productRepository->getUserItems($userId);
+        if (!$products->isEmpty()) {
+            return $products;
+        }
+        throw new ProductNotFoundException();
     }
 
     /**
